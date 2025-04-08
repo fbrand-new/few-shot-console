@@ -6,7 +6,7 @@
     "os_loss": "discriminator",
     "show_activations": false,
     "video_path": "",
-    "initial_ss": "coffee",
+    "initial_ss": "hri",
     "save_log": false,
     "save_output_video": false,
     "window_seconds": 2,

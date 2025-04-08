@@ -9,9 +9,22 @@
     <node>r1-torso</node>
 </module>
 
+<!-- <module>
+    <name>python3</name>
+    <parameters>action_recognition_module.py</parameters>
+    <workdir>/home/fbrand/few-shot-console</workdir>
+</module>
+
+<module>
+    <name>python3</name>
+    <parameters>robot_behaviour.py</parameters>
+    <workdir>/home/fbrand/few-shot-console</workdir>
+</module> -->
+
 <module>
     <name>yarpview</name>
-    <parameters>--name /action_recognition/view:i
+    <parameters>--name /action_recognition/view:i</parameters>
+    <node>localhost</node>
 </module>
 
 <!-- Connections -->

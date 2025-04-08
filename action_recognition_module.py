@@ -41,13 +41,13 @@ class ActionRecognitionModule(yarp.RFModule):
 
         # Load support set
         ss_name = self.config["initial_ss"]
-        ss_path = Path("src") / "ss" / ss_name
+        self.ss_path = Path("src") / "ss" / ss_name
         
-        if not ss_path.exists():
-            logging.error(f"Support set path does not exist: {ss_path}")
+        if not self.ss_path.exists():
+            logging.error(f"Support set path does not exist: {self.ss_path}")
             return False
             
-        self.ss, self.ss_gifs = load_ss(ss_path, self.seq_len)
+        self.ss, self.ss_gifs = load_ss(self.ss_path, self.seq_len)
 
         # Create input port
         self.input_port = yarp.BufferedPortImageRgb()
@@ -191,15 +191,16 @@ class ActionRecognitionModule(yarp.RFModule):
                     start_time = time.time()
 
                     # Read image from yarp port
-                    input_image = self.input_port.read(False)
+                    input_image = self.input_port.read(True)
                     if input_image is None:
-                        logging.warning("No image received from input port")
-                        continue
+                        logging.error("No image received from input port")
+                        raise ValueError("No image received from input port")
+
                     # Resize the image to the model input size
                     self.input_buffer_image.copy(input_image)
                     frame = np.copy(self.input_buffer_array)
                     frame = cv2.resize(frame, (224, 224))
-                    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # TODO TEST
+                    # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # TODO TEST
                     action_frames.append(frame)
 
                     # Show progress in gui
