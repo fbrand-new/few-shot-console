@@ -1,0 +1,44 @@
+<application>
+<name>action_recognition_R1</name>
+<version>1.0</version>
+
+<!-- Modules -->
+<module>
+    <name>yarpdev</name>
+    <parameters>--from /usr/local/src/robot/robots-configuration/R1SN003/sensors/RealSense_conf.ini</parameters>
+    <node>r1-torso</node>
+</module>
+
+<module>
+    <name>yarpview</name>
+    <parameters>--name /action_recognition/view:i
+</module>
+
+<!-- Connections -->
+
+<connection>
+    <from>/cer/realsense_repeater/rgbImage:o</from>
+    <to>/action_recognition/image:i</to>
+    <protocol>mjpeg</protocol>
+</connection>
+
+<connection>
+    <from>/action_recognition/image:o</from>
+    <to>/action_recognition/view:i</to>
+    <protocol>mjpeg</protocol>
+</connection>
+
+<connection>
+    <from>/action_recognition/action:o</from>
+    <to>/action_recognition/action:i</to>
+    <protocol>mjpeg</protocol>
+</connection>
+
+<connection>
+    <from>/action_recognition/behaviour:o</from>
+    <to>/yarpActionsPlayer/action:o</to>
+    <protocol>tcp</protocol>
+</connection>
+
+</application>
+

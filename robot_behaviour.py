@@ -4,10 +4,10 @@ import time
 class RobotBehaviour(yarp.RFModule):
     def configure(self, rf):
         self.action_port = yarp.Port()
-        self.action_port.open("/robot/action")
+        self.action_port.open("/action_recognition/action:i")
 
         self.behaviour_rpc_port = yarp.RpcClient()
-        self.behaviour_rpc_port.open("/robot/behaviour")
+        self.behaviour_rpc_port.open("/action_recognition/behaviour:o")
 
         self.last_action_time = None
         self.cooldown_period = 10.0  # seconds
