@@ -1,4 +1,4 @@
-name: fcl2
+name: fcl
 channels:
   - pytorch
   - conda-forge
